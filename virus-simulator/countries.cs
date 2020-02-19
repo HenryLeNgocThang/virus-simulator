@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Shapes;
 
 namespace virus_simulator
 {
     class countries
     {
-        private string name;
-
-        public string Name
-        {
-            get { return name; }
-            set { name = value.Trim(); }
-        }
+        public string Name { get; set; }
     }
 }

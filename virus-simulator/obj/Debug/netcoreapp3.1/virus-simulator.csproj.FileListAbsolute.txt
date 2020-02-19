@@ -16,3 +16,4 @@ C:\xampp\htdocs\projects\virus-simulator\virus-simulator\obj\Debug\netcoreapp3.1
 C:\xampp\htdocs\projects\virus-simulator\virus-simulator\obj\Debug\netcoreapp3.1\virus-simulator.pdb
 C:\xampp\htdocs\projects\virus-simulator\virus-simulator\obj\Debug\netcoreapp3.1\world.g.cs
 C:\xampp\htdocs\projects\virus-simulator\virus-simulator\obj\Debug\netcoreapp3.1\world.baml
+C:\xampp\htdocs\projects\virus-simulator\virus-simulator\obj\Debug\netcoreapp3.1\virus-simulator.csprojAssemblyReference.cache

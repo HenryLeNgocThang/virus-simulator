@@ -9,7 +9,7 @@ using System.Windows;
 namespace virus_simulator
 {
     /// <summary>
-    /// Interaction logic for App.xaml
+    /// Interaktionslogik für "App.xaml"
     /// </summary>
     public partial class App : Application
     {

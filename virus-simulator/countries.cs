@@ -5,8 +5,20 @@ using System.Windows.Shapes;
 
 namespace virus_simulator
 {
-    class countries
+    class ountries
     {
+        public countries()
+        {
+
+        }
+        SolidColorBrush farbe = new SolidColorBrush(Color.FromArgb(255, 50, 0, 0));
         public string Name { get; set; }
+        public Path Name { get; set; }
+
+
+        void setColor()
+        {
+
+        }
     }
 }

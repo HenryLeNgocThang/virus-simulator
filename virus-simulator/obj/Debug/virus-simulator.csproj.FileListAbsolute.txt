@@ -13,3 +13,17 @@ H:\Documents\ITU119\AWE\virus-simulator\virus-simulator\virus-simulator\obj\Debu
 H:\Documents\ITU119\AWE\virus-simulator\virus-simulator\virus-simulator\obj\Debug\virus-simulator.csproj.CoreCompileInputs.cache
 H:\Documents\ITU119\AWE\virus-simulator\virus-simulator\virus-simulator\obj\Debug\virus-simulator.exe
 H:\Documents\ITU119\AWE\virus-simulator\virus-simulator\virus-simulator\obj\Debug\virus-simulator.pdb
+C:\xampp\htdocs\projects\virus-simulator\virus-simulator\bin\Debug\virus-simulator.exe.config
+C:\xampp\htdocs\projects\virus-simulator\virus-simulator\bin\Debug\virus-simulator.exe
+C:\xampp\htdocs\projects\virus-simulator\virus-simulator\bin\Debug\virus-simulator.pdb
+C:\xampp\htdocs\projects\virus-simulator\virus-simulator\obj\Debug\virus-simulator.csprojAssemblyReference.cache
+C:\xampp\htdocs\projects\virus-simulator\virus-simulator\obj\Debug\MainWindow.g.cs
+C:\xampp\htdocs\projects\virus-simulator\virus-simulator\obj\Debug\App.g.cs
+C:\xampp\htdocs\projects\virus-simulator\virus-simulator\obj\Debug\virus-simulator_MarkupCompile.cache
+C:\xampp\htdocs\projects\virus-simulator\virus-simulator\obj\Debug\virus-simulator_MarkupCompile.lref
+C:\xampp\htdocs\projects\virus-simulator\virus-simulator\obj\Debug\MainWindow.baml
+C:\xampp\htdocs\projects\virus-simulator\virus-simulator\obj\Debug\virus-simulator.g.resources
+C:\xampp\htdocs\projects\virus-simulator\virus-simulator\obj\Debug\virus_simulator.Properties.Resources.resources
+C:\xampp\htdocs\projects\virus-simulator\virus-simulator\obj\Debug\virus-simulator.csproj.GenerateResource.cache
+C:\xampp\htdocs\projects\virus-simulator\virus-simulator\obj\Debug\virus-simulator.exe
+C:\xampp\htdocs\projects\virus-simulator\virus-simulator\obj\Debug\virus-simulator.pdb

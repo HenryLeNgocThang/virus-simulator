@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -19,19 +20,42 @@ namespace virus_simulator
         double infectionRate;
         double deathRate;
 
+
         public SolidColorBrush brush;
 
+        public Path path;
 
-        Path path;
+        public float xPos;
+        public float yPos;
 
-        public Country(Path land, int population, int dichte)
+        public string myName;
+
+        public Country(Path land, int population, int dichte, string countryCode)
         {
-            brush = new SolidColorBrush(Color.FromArgb(colorInfection, colorDeaths, 0, 0));
             path = land;
             path.Fill = brush;
             einwohner = (int)(population * Math.Pow(10, 6));
             bevDichte = dichte;
 
+            myName = countryCode;
+
+            // GET DATA
+            string data = Convert.ToString(path.Data);
+
+            // REMOVE CHARS BUT NOT ,.;0123456789
+            Regex rgx = new Regex("[^.0-9;,]");
+            string str = rgx.Replace(data, ";");
+
+            // SEPERATOR
+            string delimStr = ";";
+            char[] delimiter = delimStr.ToCharArray();
+
+            // SPLIT DATA STRING AT THE SEPERATOR AND ADD FIRST TWO NUMBERS TO COORDS LIST
+            xPos = float.Parse(str.Split(delimiter)[1]);
+            yPos = float.Parse(str.Split(delimiter)[2]);
+
+            //Console.WriteLine(xPos);
+            //Console.WriteLine(yPos);
         }
 
         public void SetColor()

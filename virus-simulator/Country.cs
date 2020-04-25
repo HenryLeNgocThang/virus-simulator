@@ -50,7 +50,7 @@ namespace virus_simulator
             string delimStr = ";";
             char[] delimiter = delimStr.ToCharArray();
 
-            // SPLIT DATA STRING AT THE SEPERATOR AND ADD FIRST TWO NUMBERS TO COORDS LIST
+            // SPLIT DATA STRING AT THE SEPERATOR AND ASSIGN FIRST TWO NUMBERS
             xPos = float.Parse(str.Split(delimiter)[1]);
             yPos = float.Parse(str.Split(delimiter)[2]);
 

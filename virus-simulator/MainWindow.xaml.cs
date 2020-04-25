@@ -25,20 +25,17 @@ namespace virus_simulator
         float radius = 5;
         float increase = 50f;
 
-        Stopwatch sw = new Stopwatch();
-
         public MainWindow()
         {
             InitializeComponent();
+            brush = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
 
-            sw.Start();
             for (int i = 0; i < names.Count; i++)
             {
                 Path path = (Path)FindName(names[i]);
                 countries.Add(new Country(path, 0, 0, names[i]));
+                countries[i].path.Fill = brush;
             }
-            sw.Stop();
-            Console.WriteLine("Elapsed={0}", sw.Elapsed);
 
             timer = new DispatcherTimer();
             timer.Tick += new EventHandler(Update);

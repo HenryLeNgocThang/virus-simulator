@@ -12,7 +12,7 @@ namespace virus_simulator
         int deaths = 0;
         public int einwohner;
         int bevDichte;
-        public byte colorInfection = 255;
+        public byte colorInfection = 0;
         public byte colorDeaths = 255;
         double infectionRate;
         double deathRate;
@@ -57,8 +57,20 @@ namespace virus_simulator
         {
             if (infectionRate %1==0)
             {
-                colorInfection -= 1;
+                if (colorInfection < 255 && colorInfection >= 0)
+                {
+                    colorInfection += 1;
+                }
             }
+
+            if (deathRate % 1 == 0)
+            {
+                if (colorDeaths > 100 && colorDeaths <= 255)
+                {
+                    colorDeaths -= 1;
+                }
+            }
+
             brush = new SolidColorBrush(Color.FromArgb(colorInfection, colorDeaths, 0, 0));
             path.Fill = brush;
 
@@ -69,11 +81,10 @@ namespace virus_simulator
             infectionRate = infections / einwohner * 100;
 
         }
-        void NewDeath()
+        public void NewDeath()
         {
             deaths += 1;
             deathRate = deaths / einwohner * 100;
-
         }
     }
 }

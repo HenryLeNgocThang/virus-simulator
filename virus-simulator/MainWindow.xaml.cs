@@ -31,7 +31,7 @@ namespace virus_simulator
         float xRad = 1f;
         float yRad = 1f;
         float radius = 5;
-        float increase = 50f;
+        float increase = 2f;
         string filePath = @"C:\xampp\htdocs\projects\virus-simulator\virus-simulator\worlddatabank.xml";
         XmlDocument doc = new XmlDocument();
 
@@ -63,15 +63,18 @@ namespace virus_simulator
             // Timer which calls Update Method in 1 FPS (Frames per Seconds)
             timer = new DispatcherTimer();
             timer.Tick += new EventHandler(Update);
-            timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 1);
+            timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 30);
         }
 
         private void Update(object sender, EventArgs e)
         {
             // Increase and repositioning infection zone
-            radius += increase;
-            xRad -= increase / 2;
-            yRad -= increase / 2;
+            if (radius <= Window.Width * 2)
+            {
+                radius += increase;
+                xRad -= increase / 2;
+                yRad -= increase / 2;
+            }
 
             // Check every country if its in the infection zone
             for (int i = 0; i < countries.Count; i++)
@@ -83,6 +86,7 @@ namespace virus_simulator
                 {
                     countries[i].SetColor();
                     countries[i].NewInfection();
+                    countries[i].NewDeath();
                 }
             }
         }

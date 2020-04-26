@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -13,13 +10,12 @@ namespace virus_simulator
     {
         int infections = 0;
         int deaths = 0;
-        int einwohner;
+        public int einwohner;
         int bevDichte;
         byte colorInfection = 255;
         byte colorDeaths = 255;
         double infectionRate;
         double deathRate;
-
 
         public SolidColorBrush brush;
 
@@ -27,7 +23,6 @@ namespace virus_simulator
 
         public float xPos;
         public float yPos;
-
         public string myName;
 
         public Country(Path land, int population, int dichte, string countryCode)

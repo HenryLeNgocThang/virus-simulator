@@ -1,14 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text.RegularExpressions;
-using System.Timers;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Xml;
 
 namespace virus_simulator
+
+    /*
+     * 
+     * TODOs:
+     * 
+     * - Stop timer if game ends
+     * - Display population on xaml
+     * 
+     */
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -24,16 +31,25 @@ namespace virus_simulator
         float yRad = 1f;
         float radius = 5;
         float increase = 50f;
+        XmlDocument doc = new XmlDocument();
 
         public MainWindow()
         {
             InitializeComponent();
             brush = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
 
+            string filePath = @"C:\xampp\htdocs\projects\virus-simulator\virus-simulator\worlddatabank.xml";
+            doc.Load(filePath);
+
+            foreach (XmlNode xmlNode in doc.DocumentElement.GetElementsByTagName("population"))
+            {
+                Console.WriteLine(xmlNode.InnerText);
+            }
+
             for (int i = 0; i < names.Count; i++)
             {
                 Path path = (Path)FindName(names[i]);
-                countries.Add(new Country(path, 0, 0, names[i]));
+                countries.Add(new Country(path, 10, 1, names[i]));
                 countries[i].path.Fill = brush;
             }
 
@@ -45,8 +61,8 @@ namespace virus_simulator
         private void Update(object sender, EventArgs e)
         {
             brush = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
-            radius += increase;
 
+            radius += increase;
             xRad -= increase / 2;
             yRad -= increase / 2;
 

@@ -8,21 +8,22 @@ using System.Xml;
 
 namespace virus_simulator
 
-    /*
-     * 
-     * TODOs:
-     * 
-     * - Stop timer if game ends
-     * - Display population on xaml
-     * 
-     */
+/*
+ * 
+ * TODOs:
+ * 
+ * - Stop timer if game ends
+ * - Display population on xaml
+ * - Only one counrty pressable at the beginning
+ * - Use relative filePath to project folder BUT dont use System.IO (if so System.Windows.Shapes wouldnt work)
+ * 
+ */
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<string> names = new List<string>() { "AF", "AO", "AL", "AE", "AR", "AM", "AU", "AT", "AZ", "BI", "BE", "BJ", "BF", "BD", "BG", "BA", "BY", "BZ", "BO", "BR", "BN", "BT", "BW", "CF", "CA", "CH", "CL", "CN", "CI", "CM", "CD", "CG", "CO", "CR", "CU", "CZ", "DE", "DJ", "DK", "DO", "DZ", "EC", "EG", "ER", "EE", "ET", "FI", "FJ", "GA", "GB", "GE", "GH", "GN", "GM", "GW", "GQ", "GR", "GL", "GT", "GY", "HN", "HR", "HT", "HU", "ID", "IN", "IE", "IR", "IQ", "IS", "IL", "IT", "JM", "JO", "JP", "KZ", "KE", "KG", "KH", "KR", "KW", "LA", "LB", "LR", "LY", "LK", "LS", "LT", "LU", "LV", "MA", "MD", "MG", "MX", "MK", "ML", "MM", "ME", "MN", "MZ", "MR", "MW", "MY", "NA", "NE", "NG", "NI", "NL", "NO", "NP", "NZ", "OM", "PK", "PA", "PE", "PH", "PG", "PL", "KP", "PT", "PY", "PS", "QA", "RO", "RU", "RW", "EH", "SA", "SD", "SS", "SN", "SL", "SV", "RS", "SR", "SK", "SI", "SE", "SZ", "SY", "TD", "TG", "TH", "TJ", "TM", "TL", "TN", "TR", "TW", "TZ", "UG", "UA", "UY", "US", "UZ", "VE", "VN", "VU", "YE", "ZA", "ZM", "ZW", "SO", "GF", "FR", "ES", "AW", "AI", "AD", "AG", "BS", "BM", "BB", "KM", "CV", "KY", "DM", "FK", "FO", "GD", "HK", "KN", "LC", "LI", "MV", "MT", "MS", "MU", "NC", "NR", "PN", "PR", "PF", "SG", "SB", "ST", "SX", "SC", "TC", "TO", "TT", "VC", "VG", "VI", "CY", "RE", "YT", "MQ", "GP", "CW", "IC" };
         SolidColorBrush brush;
         DispatcherTimer timer;
 
@@ -31,41 +32,48 @@ namespace virus_simulator
         float yRad = 1f;
         float radius = 5;
         float increase = 50f;
+        string filePath = @"C:\xampp\htdocs\projects\virus-simulator\virus-simulator\worlddatabank.xml";
         XmlDocument doc = new XmlDocument();
 
         public MainWindow()
         {
             InitializeComponent();
             brush = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
-
-            string filePath = @"C:\xampp\htdocs\projects\virus-simulator\virus-simulator\worlddatabank.xml";
             doc.Load(filePath);
 
-            foreach (XmlNode xmlNode in doc.DocumentElement.GetElementsByTagName("population"))
+            // Try to create a class if in XAML there is a <Path /> with the same name as in the XML feed.
+            foreach (XmlNode xmlNode in doc.DocumentElement.GetElementsByTagName("alpha2Code"))
             {
-                Console.WriteLine(xmlNode.InnerText);
+                Path path = (Path)FindName(xmlNode.InnerText);
+
+                try
+                {
+                    countries.Add(new Country(path, 10, 1, xmlNode.InnerText));
+                }
+                catch (Exception e)
+                {
+                }
             }
 
-            for (int i = 0; i < names.Count; i++)
+            foreach (var country in countries)
             {
-                Path path = (Path)FindName(names[i]);
-                countries.Add(new Country(path, 10, 1, names[i]));
-                countries[i].path.Fill = brush;
+                country.path.Fill = brush;
             }
 
+            // Timer which calls Update Method in 1 FPS (Frames per Seconds)
             timer = new DispatcherTimer();
             timer.Tick += new EventHandler(Update);
-            timer.Interval = new TimeSpan(0, 0, 1);
+            timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 1);
         }
 
         private void Update(object sender, EventArgs e)
         {
-            brush = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
-
+            // Increase and repositioning infection zone
             radius += increase;
             xRad -= increase / 2;
             yRad -= increase / 2;
 
+            // Check every country if its in the infection zone
             for (int i = 0; i < countries.Count; i++)
             {
                 if (xRad < countries[i].xPos &&
@@ -73,7 +81,8 @@ namespace virus_simulator
                     yRad < countries[i].yPos &&
                     yRad + radius > countries[i].yPos)
                 {
-                    countries[i].path.Fill = brush;
+                    countries[i].SetColor();
+                    countries[i].NewInfection();
                 }
             }
         }
@@ -82,6 +91,7 @@ namespace virus_simulator
         {
             brush = new SolidColorBrush(Color.FromArgb(255, 127, 255, 0));
 
+            // Check every country if mouse was over it at the pressing on the map
             for (int i = 0; i < countries.Count; i++)
             {
                 if (countries[i] != null)

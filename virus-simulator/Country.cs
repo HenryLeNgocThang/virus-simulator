@@ -12,12 +12,12 @@ namespace virus_simulator
         int deaths = 0;
         public int einwohner;
         int bevDichte;
-        byte colorInfection = 255;
-        byte colorDeaths = 255;
+        public byte colorInfection = 255;
+        public byte colorDeaths = 255;
         double infectionRate;
         double deathRate;
 
-        public SolidColorBrush brush;
+        SolidColorBrush brush;
 
         public Path path;
 

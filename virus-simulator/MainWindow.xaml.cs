@@ -14,7 +14,6 @@ namespace virus_simulator
  * 
  * - Stop timer if game ends
  * - Display population on xaml
- * - Only one counrty pressable at the beginning
  * - Use relative filePath to project folder BUT dont use System.IO (if so System.Windows.Shapes wouldnt work)
  * 
  */
@@ -29,6 +28,7 @@ namespace virus_simulator
         XmlDocument doc = new XmlDocument();
         List<Country> countries = new List<Country>();
 
+        bool initOnlyOnce = false;
         float xRad = 1f;
         float yRad = 1f;
         float radius = 5f;
@@ -110,8 +110,15 @@ namespace virus_simulator
 
         private void World_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            brush = new SolidColorBrush(Color.FromArgb(255, 127, 255, 0));
+            if (!initOnlyOnce)
+            {
+                setInfection();
+                initOnlyOnce = true;
+            }
+        }
 
+        void setInfection()
+        {
             // Check every country if mouse was over it at the pressing on the map
             for (int i = 0; i < countries.Count; i++)
             {

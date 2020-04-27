@@ -8,31 +8,35 @@ namespace virus_simulator
 {
     class Country
     {
+        SolidColorBrush brush;
+        Path path;
+
         int infections = 0;
         int deaths = 0;
-        public int einwohner;
-        int bevDichte;
-        public byte colorInfection = 0;
-        public byte colorDeaths = 255;
+        int population;
+        int populationDensity;
+        byte colorInfection = 0;
+        byte colorDeaths = 255;
         double infectionRate;
         double deathRate;
+        float xPos;
+        float yPos;
+        string countryName;
+        int landArea;
 
-        SolidColorBrush brush;
+        public Path Path { get => path; }
+        public float XPos { get => xPos; }
+        public float YPos { get => yPos; }
+        public string CountryName { get => countryName; }
 
-        public Path path;
-
-        public float xPos;
-        public float yPos;
-        public string myName;
-
-        public Country(Path land, int population, int dichte, string countryCode)
+        public Country(Path land, int populationOfLand, int sizeOfLand, string nameOfLand)
         {
             path = land;
             path.Fill = brush;
-            einwohner = (int)(population * Math.Pow(10, 6));
-            bevDichte = dichte;
-
-            myName = countryCode;
+            population = populationOfLand;
+            countryName = nameOfLand;
+            landArea = sizeOfLand;
+            populationDensity = Convert.ToInt32(populationOfLand / sizeOfLand);
 
             // GET DATA
             string data = Convert.ToString(path.Data);
@@ -48,9 +52,6 @@ namespace virus_simulator
             // SPLIT DATA STRING AT THE SEPERATOR AND ASSIGN FIRST TWO NUMBERS
             xPos = float.Parse(str.Split(delimiter)[1]);
             yPos = float.Parse(str.Split(delimiter)[2]);
-
-            //Console.WriteLine(xPos);
-            //Console.WriteLine(yPos);
         }
 
         public void SetColor()
@@ -78,13 +79,13 @@ namespace virus_simulator
         public void NewInfection()
         {
             infections += 1;
-            infectionRate = infections / einwohner * 100;
+            infectionRate = infections / population * 100;
 
         }
         public void NewDeath()
         {
             deaths += 1;
-            deathRate = deaths / einwohner * 100;
+            deathRate = deaths / population * 100;
         }
     }
 }

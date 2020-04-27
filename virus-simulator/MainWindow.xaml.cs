@@ -26,14 +26,20 @@ namespace virus_simulator
     {
         SolidColorBrush brush;
         DispatcherTimer timer;
-
+        XmlDocument doc = new XmlDocument();
         List<Country> countries = new List<Country>();
+
         float xRad = 1f;
         float yRad = 1f;
-        float radius = 5;
+        float radius = 5f;
         float increase = 2f;
+        /*
+
+        !!! IMPORTANT !!!
+        The following string filePath has to be adjusted!
+
+        */
         string filePath = @"C:\xampp\htdocs\projects\virus-simulator\virus-simulator\worlddatabank.xml";
-        XmlDocument doc = new XmlDocument();
 
         public MainWindow()
         {
@@ -42,25 +48,36 @@ namespace virus_simulator
             doc.Load(filePath);
 
             // Try to create a class if in XAML there is a <Path /> with the same name as in the XML feed.
-            foreach (XmlNode xmlNode in doc.DocumentElement.GetElementsByTagName("alpha2Code"))
+            // Add the population at the class initializing aswell.
+            foreach (XmlNode row in doc.DocumentElement.GetElementsByTagName("row"))
             {
-                Path path = (Path)FindName(xmlNode.InnerText);
+                Path path = (Path)FindName(row.SelectSingleNode("alpha2Code").InnerText);
 
                 try
                 {
-                    countries.Add(new Country(path, 10, 1, xmlNode.InnerText));
+                    countries.Add
+                    (
+                        new Country
+                        (
+                            path,
+                            Convert.ToInt32(row.SelectSingleNode("population").InnerText),
+                            Convert.ToInt32(row.SelectSingleNode("area").InnerText),
+                            row.SelectSingleNode("name").InnerText
+                        )
+                    );
                 }
                 catch (Exception e)
                 {
                 }
             }
 
+            // We have to fill all countries with color otherwise we will get problems with filling countries with color later on.
             foreach (var country in countries)
             {
-                country.path.Fill = brush;
+                country.Path.Fill = brush;
             }
 
-            // Timer which calls Update Method in 1 FPS (Frames per Seconds)
+            // Timer which calls Update Method in 30 FPS (Frames per Seconds)
             timer = new DispatcherTimer();
             timer.Tick += new EventHandler(Update);
             timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 30);
@@ -79,10 +96,10 @@ namespace virus_simulator
             // Check every country if its in the infection zone
             for (int i = 0; i < countries.Count; i++)
             {
-                if (xRad < countries[i].xPos &&
-                    xRad + radius > countries[i].xPos &&
-                    yRad < countries[i].yPos &&
-                    yRad + radius > countries[i].yPos)
+                if (xRad < countries[i].XPos &&
+                    xRad + radius > countries[i].XPos &&
+                    yRad < countries[i].YPos &&
+                    yRad + radius > countries[i].YPos)
                 {
                     countries[i].SetColor();
                     countries[i].NewInfection();
@@ -100,11 +117,11 @@ namespace virus_simulator
             {
                 if (countries[i] != null)
                 {
-                    if (countries[i].path.IsMouseOver)
+                    if (countries[i].Path.IsMouseOver)
                     {
-                        countries[i].path.Fill = brush;
-                        xRad = countries[i].xPos;
-                        yRad = countries[i].yPos;
+                        countries[i].Path.Fill = brush;
+                        xRad = countries[i].XPos;
+                        yRad = countries[i].YPos;
                         timer.Start();
                     }
                 }

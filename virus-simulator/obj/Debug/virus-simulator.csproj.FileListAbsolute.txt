@@ -27,3 +27,5 @@ C:\xampp\htdocs\projects\virus-simulator\virus-simulator\obj\Debug\virus_simulat
 C:\xampp\htdocs\projects\virus-simulator\virus-simulator\obj\Debug\virus-simulator.csproj.GenerateResource.cache
 C:\xampp\htdocs\projects\virus-simulator\virus-simulator\obj\Debug\virus-simulator.exe
 C:\xampp\htdocs\projects\virus-simulator\virus-simulator\obj\Debug\virus-simulator.pdb
+C:\xampp\htdocs\projects\virus-simulator\virus-simulator\obj\Debug\pageLandInfo.g.cs
+C:\xampp\htdocs\projects\virus-simulator\virus-simulator\obj\Debug\pageLandInfo.baml

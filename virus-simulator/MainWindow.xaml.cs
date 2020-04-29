@@ -13,7 +13,6 @@ namespace virus_simulator
  * TODOs:
  * 
  * - Stop timer if game ends
- * - Display population on xaml
  * - Use relative filePath to project folder BUT dont use System.IO (if so System.Windows.Shapes wouldnt work)
  * 
  */
@@ -28,7 +27,7 @@ namespace virus_simulator
         XmlDocument doc = new XmlDocument();
         List<Country> countries = new List<Country>();
 
-        bool initOnlyOnce = false;
+        bool gameStarted = false;
         float xRad = 1f;
         float yRad = 1f;
         float radius = 5f;
@@ -62,7 +61,8 @@ namespace virus_simulator
                             path,
                             Convert.ToInt32(row.SelectSingleNode("population").InnerText),
                             Convert.ToInt32(row.SelectSingleNode("area").InnerText),
-                            row.SelectSingleNode("name").InnerText
+                            row.SelectSingleNode("name").InnerText,
+                            row.SelectSingleNode("alpha2Code").InnerText
                         )
                     );
                 }
@@ -104,20 +104,12 @@ namespace virus_simulator
                     countries[i].SetColor();
                     countries[i].NewInfection();
                     countries[i].NewDeath();
+                    countries[i].NewPopulation();
                 }
             }
         }
 
         private void World_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            if (!initOnlyOnce)
-            {
-                setInfection();
-                initOnlyOnce = true;
-            }
-        }
-
-        void setInfection()
         {
             // Check every country if mouse was over it at the pressing on the map
             for (int i = 0; i < countries.Count; i++)
@@ -126,10 +118,20 @@ namespace virus_simulator
                 {
                     if (countries[i].Path.IsMouseOver)
                     {
-                        countries[i].Path.Fill = brush;
-                        xRad = countries[i].XPos;
-                        yRad = countries[i].YPos;
-                        timer.Start();
+                        if (!gameStarted)
+                        {
+                            countries[i].Path.Fill = brush;
+                            xRad = countries[i].XPos;
+                            yRad = countries[i].YPos;
+                            timer.Start();
+                            gameStarted = true;
+                        }
+                        else
+                        {
+                            pageLandInfo info = new pageLandInfo(countries[i].CountryName, countries[i].CountryCode, countries[i].InfectionRate.ToString("F"), countries[i].Infections.ToString(), countries[i].Deaths.ToString(), countries[i].Remaining.ToString());
+                            info.ShowDialog();
+                            break;
+                        }
                     }
                 }
             }

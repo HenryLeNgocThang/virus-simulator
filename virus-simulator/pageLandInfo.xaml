@@ -1,0 +1,38 @@
+﻿<Window x:Class="virus_simulator.pageLandInfo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:virus_simulator"
+        mc:Ignorable="d"
+        Title="Länderinfo" Height="450" Width="380" >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="7*"/>
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Column="0" Grid.Row="0" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Land: "></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="1" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Kuerzel: "></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="2" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Infektionsrate: "></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="3" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Infizierte: "></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="4" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Tote: "></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="5" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Verbleibende: "></TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="0" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left" Name="tbName" ></TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="1" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Name="tbKuerzel"></TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Name="tbRate" ></TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="3" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Name="tbInfectedabs" ></TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="4" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Name="tbTote" ></TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="5" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Name="tbVerbleibende" ></TextBlock>
+        <Button Grid.Column="1" Grid.Row="6" Content="Schließen" Click="btnClose_Click"/>
+    </Grid>
+</Window>

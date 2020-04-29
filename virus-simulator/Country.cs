@@ -23,19 +23,27 @@ namespace virus_simulator
         float yPos;
         string countryName;
         int landArea;
+        string countryCode;
+        int remaining;
 
         public Path Path { get => path; }
         public float XPos { get => xPos; }
         public float YPos { get => yPos; }
         public string CountryName { get => countryName; }
+        public string CountryCode { get => countryCode; }
+        public double InfectionRate { get => infectionRate; }
+        public int Infections { get => infections; }
+        public int Deaths { get => deaths; }
+        public int Remaining { get => remaining; }
 
-        public Country(Path land, int populationOfLand, int sizeOfLand, string nameOfLand)
+        public Country(Path land, int populationOfLand, int sizeOfLand, string nameOfLand, string codeOfLand)
         {
             path = land;
             path.Fill = brush;
             population = populationOfLand;
             countryName = nameOfLand;
             landArea = sizeOfLand;
+            countryCode = codeOfLand;
             populationDensity = Convert.ToInt32(populationOfLand / sizeOfLand);
 
             // GET DATA
@@ -72,20 +80,30 @@ namespace virus_simulator
                 }
             }
 
+            if (countryCode == "DE")
+            {
+                float newF = ((infections / population) * 100);
+                Console.WriteLine(newF);
+            }
+
             brush = new SolidColorBrush(Color.FromArgb(colorInfection, colorDeaths, 0, 0));
             path.Fill = brush;
 
         }
         public void NewInfection()
         {
-            infections += 1;
+            infections += 1000;
             infectionRate = infections / population * 100;
-
         }
         public void NewDeath()
         {
-            deaths += 1;
+            deaths += 1000;
             deathRate = deaths / population * 100;
+        }
+
+        public void NewPopulation()
+        {
+            remaining = population - deaths;
         }
     }
 }

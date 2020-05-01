@@ -7,15 +7,6 @@ using System.Windows.Threading;
 using System.Xml;
 
 namespace virus_simulator
-
-/*
- * 
- * TODOs:
- * 
- * - Stop timer if game ends
- * - Use relative filePath to project folder BUT dont use System.IO (if so System.Windows.Shapes wouldnt work)
- * 
- */
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -28,20 +19,17 @@ namespace virus_simulator
         List<Country> countries = new List<Country>();
 
         bool gameStarted = false;
-        float xRad = 1f;
-        float yRad = 1f;
-        float radius = 5f;
-        float increase = 2f;
-        /*
-
-        !!! IMPORTANT !!!
-        The following string filePath has to be adjusted!
-
-        */
-        string filePath = @"C:\xampp\htdocs\projects\virus-simulator\virus-simulator\worlddatabank.xml";
+        float xRad;
+        float yRad;
+        float radius = 2f;
+        float increase = 1f;
+        string filePath = "worlddatabank.xml";
 
         public MainWindow()
         {
+            MenuVirus menuVirus = new MenuVirus();
+            menuVirus.ShowDialog();
+
             InitializeComponent();
             brush = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
             doc.Load(filePath);
@@ -62,7 +50,10 @@ namespace virus_simulator
                             Convert.ToInt32(row.SelectSingleNode("population").InnerText),
                             Convert.ToInt32(row.SelectSingleNode("area").InnerText),
                             row.SelectSingleNode("name").InnerText,
-                            row.SelectSingleNode("alpha2Code").InnerText
+                            row.SelectSingleNode("alpha2Code").InnerText,
+                            menuVirus.GetKontagiositätsindex,
+                            menuVirus.GetInfektionsdauer,
+                            menuVirus.GetMortalitaetsrate
                         )
                     );
                 }
@@ -76,11 +67,6 @@ namespace virus_simulator
             {
                 country.Path.Fill = brush;
             }
-
-            // Timer which calls Update Method in 30 FPS (Frames per Seconds)
-            timer = new DispatcherTimer();
-            timer.Tick += new EventHandler(Update);
-            timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 30);
         }
 
         private void Update(object sender, EventArgs e)
@@ -109,6 +95,14 @@ namespace virus_simulator
             }
         }
 
+        public void SSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            TxtSliderValue.Text = sSlider.Value.ToString();
+            timer = new DispatcherTimer();
+            timer.Tick += new EventHandler(Update);
+            timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / (int)sSlider.Value);
+        }
+
         private void World_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             // Check every country if mouse was over it at the pressing on the map
@@ -128,7 +122,17 @@ namespace virus_simulator
                         }
                         else
                         {
-                            pageLandInfo info = new pageLandInfo(countries[i].CountryName, countries[i].CountryCode, countries[i].InfectionRate.ToString("F"), countries[i].Infections.ToString(), countries[i].Deaths.ToString(), countries[i].Remaining.ToString());
+                            pageLandInfo info = new pageLandInfo
+                            (
+                                countries[i].CountryName,
+                                countries[i].DeathRate.ToString("F"),
+                                countries[i].InfectionRate.ToString("F"),
+                                countries[i].Infections.ToString(),
+                                countries[i].Deaths.ToString(),
+                                countries[i].Remaining.ToString(),
+                                countries[i].Population.ToString()
+                            );
+
                             info.ShowDialog();
                             break;
                         }

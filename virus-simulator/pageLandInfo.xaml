@@ -20,19 +20,22 @@
             <RowDefinition Height="2*"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Column="0" Grid.Row="0" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Land: "></TextBlock>
-        <TextBlock Grid.Column="0" Grid.Row="1" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Kuerzel: "></TextBlock>
-        <TextBlock Grid.Column="0" Grid.Row="2" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Infektionsrate: "></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="1" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Infektionsrate: "></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="2" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Sterberate: "></TextBlock>
         <TextBlock Grid.Column="0" Grid.Row="3" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Infizierte: "></TextBlock>
         <TextBlock Grid.Column="0" Grid.Row="4" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Tote: "></TextBlock>
         <TextBlock Grid.Column="0" Grid.Row="5" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Verbleibende: "></TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="6" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Bevölkerung: "></TextBlock>
         <TextBlock Grid.Column="1" Grid.Row="0" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left" Name="tbName" ></TextBlock>
-        <TextBlock Grid.Column="1" Grid.Row="1" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Name="tbKuerzel"></TextBlock>
-        <TextBlock Grid.Column="1" Grid.Row="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Name="tbRate" ></TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="1" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Name="tbRate"></TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="2" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Name="tbSterberate" ></TextBlock>
         <TextBlock Grid.Column="1" Grid.Row="3" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Name="tbInfectedabs" ></TextBlock>
         <TextBlock Grid.Column="1" Grid.Row="4" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Name="tbTote" ></TextBlock>
         <TextBlock Grid.Column="1" Grid.Row="5" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Name="tbVerbleibende" ></TextBlock>
-        <Button Grid.Column="1" Grid.Row="6" Content="Schließen" Click="btnClose_Click"/>
+        <TextBlock Grid.Column="1" Grid.Row="6" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Left" Name="tbBevölkerung" ></TextBlock>
+        <Button Grid.Column="1" Grid.Row="7" Content="Schließen" Click="btnClose_Click"/>
     </Grid>
 </Window>

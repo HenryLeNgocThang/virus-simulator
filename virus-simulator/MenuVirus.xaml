@@ -1,0 +1,55 @@
+﻿<Window x:Class="virus_simulator.MenuVirus"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:virus_simulator"
+        mc:Ignorable="d"
+        Title="VirusMenü" Height="400" Width="400">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" Height="22" Name="menuVirus">
+            <MenuItem Header="_Programm">
+                <Separator/>
+                <MenuItem Header="Beenden" InputGestureText="Strg+B"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Hilfe">
+                <Separator/>
+                <MenuItem Header="Benutzerhandbuch" InputGestureText="Strg+H" ></MenuItem>
+                <MenuItem Header="Wiki" InputGestureText="Strg+W" ></MenuItem>
+            </MenuItem>
+        </Menu>
+        <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" Content="Kontagiositätsindex" HorizontalAlignment="Left" Height="30"  VerticalContentAlignment="Center" Margin="5,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120"></Label>
+                <Button Grid.Column="2" Grid.Row="7" Height="30" Width="80" Content="Start" Click="btnClose_Click"></Button>
+                <TextBlock Grid.Row="1" Grid.Column="2" Name="KIndexSliderValue" Width="40" Height="20" HorizontalAlignment="Center"/>
+                <Slider Grid.Row="1" Grid.Column="1" Minimum="0.1" Maximum="1.0"  Value="0.1"  Margin="0,5,0,0" IsSnapToTickEnabled="True" AutoToolTipPrecision="1" TickFrequency="0.1" TickPlacement="Both" Width="100" Height="30" VerticalAlignment="Top"  Name="Kontagiositätsindex" ValueChanged="KIndex_ValueChanged"></Slider>
+                <Label Grid.Column="0" Content="Infektionsdauer" HorizontalAlignment="Left" Height="30"  VerticalContentAlignment="Center" Margin="5,5,0,0" Grid.Row="3" VerticalAlignment="Top" Width="120"></Label>
+                <TextBlock Grid.Row="3" Grid.Column="2" Name="InfDauerSliderValue" Width="40" Height="20" HorizontalAlignment="Center"/>
+                <Slider Grid.Row="3" Grid.Column="1" Minimum="1" Maximum="30"  Value="1"  Margin="0,5,0,0" IsSnapToTickEnabled="True" AutoToolTipPrecision="1" TickFrequency="1" TickPlacement="Both" Width="100" Height="30" VerticalAlignment="Top"  Name="Infektionsdauer" ValueChanged="InfDauer_ValueChanged"></Slider>
+                <Label Content="%" Grid.Column="2" HorizontalAlignment="Left" Height="30" Margin="91,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="40"/>
+                <Label Content="Tage" Grid.Column="2" HorizontalAlignment="Left" Height="30" Margin="91,0,0,0" Grid.Row="3" VerticalAlignment="Center" Width="40"/>
+                <Label Grid.Column="0" Content="Mortalitätsrate" HorizontalAlignment="Left" Height="30"  VerticalContentAlignment="Center" Margin="5,5,0,0" Grid.Row="5" VerticalAlignment="Top" Width="120"></Label>
+                <TextBlock Grid.Row="5" Grid.Column="2" Name="MortalitaetSliderValue" Width="40" Height="20" HorizontalAlignment="Center"/>
+                <Slider Grid.Row="5" Grid.Column="1" Minimum="1" Maximum="100"  Value="1"  Margin="0,10,0,0" IsSnapToTickEnabled="True" AutoToolTipPrecision="1" TickFrequency="1"  Width="100" Height="30" VerticalAlignment="Top"  Name="Mortalitaetsrate" ValueChanged="Mortalitaet_ValueChanged"></Slider>
+                <Label Content="%" Grid.Column="2" HorizontalAlignment="Left" Margin="91,0,0,0" Grid.Row="5" VerticalAlignment="Center" Width="40"/>
+            </Grid>
+        </StackPanel>
+    </DockPanel>
+
+</Window>

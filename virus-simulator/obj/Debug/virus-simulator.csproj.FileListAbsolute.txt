@@ -29,3 +29,5 @@ C:\xampp\htdocs\projects\virus-simulator\virus-simulator\obj\Debug\virus-simulat
 C:\xampp\htdocs\projects\virus-simulator\virus-simulator\obj\Debug\virus-simulator.pdb
 C:\xampp\htdocs\projects\virus-simulator\virus-simulator\obj\Debug\pageLandInfo.g.cs
 C:\xampp\htdocs\projects\virus-simulator\virus-simulator\obj\Debug\pageLandInfo.baml
+C:\xampp\htdocs\projects\virus-simulator\virus-simulator\obj\Debug\MenuVirus.g.cs
+C:\xampp\htdocs\projects\virus-simulator\virus-simulator\obj\Debug\MenuVirus.baml
